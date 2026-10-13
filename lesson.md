@@ -505,8 +505,49 @@ ORDER BY
 
 👋👋👋 **Group Exercise 7 — HAVING:**
 - Count transactions per town, then show only towns with more than 5,000 transactions.
+```sql
+SELECT
+  town,
+  COUNT(*) AS transaction_count
+FROM
+  resale_flat_prices_2017
+GROUP BY
+  town
+HAVING
+  transaction_count > 5000
+ORDER BY 
+    transaction_count DESC;
+```
+
 - Show the average floor area per flat type, but only for flat types whose average floor area is above 90 sqm.
+```sql
+SELECT
+  flat_type,
+  AVG(floor_area_sqm) AS avg_area_sqm
+FROM
+  resale_flat_prices_2017
+GROUP BY
+  flat_type
+HAVING
+  avg_area_sqm > 90
+ORDER BY
+  avg_area_sqm DESC;
+```
+
 - Find towns where the maximum resale price exceeds $900,000, sorted highest first. (Hint: filter on `MAX(resale_price)` in `HAVING`.)
+```sql
+SELECT
+  town,
+  MAX(resale_price) AS max_resale_price
+FROM
+  resale_flat_prices_2017
+GROUP BY
+  town
+HAVING
+  max_resale_price > 9000000
+ORDER BY
+  max_resale_price DESC;
+```
 
 ### 💬 Reflection
 
