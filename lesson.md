@@ -408,8 +408,45 @@ GROUP BY
 
 👋👋👋 **Group Exercise 6:**
 - Select the average resale price by flat type.
+```sql
+SELECT
+  flat_type,
+  AVG(resale_price) AS avg_price
+FROM
+  resale_flat_prices_2017
+GROUP BY
+  flat_type;
+```
+  
 - Select the average resale price by flat type and flat model.
+```sql
+SELECT
+  flat_type,
+  flat_model,
+  AVG(resale_price) AS avg_price
+FROM
+  resale_flat_prices_2017
+GROUP BY
+  flat_type, flat_model;
+```
+  
 - Select the average resale price by town and lease commence date, only for lease commence dates after year 2010, sorted by town (descending) and lease commence date (descending).
+```sql
+SELECT
+  town,
+  lease_commence_date,
+  AVG(resale_price) AS avg_price
+FROM
+  resale_flat_prices_2017
+WHERE
+  lease_commence_date > 2010
+GROUP BY
+  town, lease_commence_date
+ORDER BY
+  town DESC, lease_commence_date DESC;
+```
+
+
 
 👋👋👋 **Group Exercise 7 — HAVING:**
 - Count transactions per town, then show only towns with more than 5,000 transactions.
