@@ -105,6 +105,15 @@ ORDER BY
 👋 **Exercise 1:**
 - Select any 3 columns from the table.
 - Select flats from highest to lowest resale price in Punggol.
+```sql
+SELECT
+  town, street_name, resale_price
+FROM
+  resale_flat_prices_2017
+WHERE town = 'PUNGGOL'
+ORDER BY
+  resale_price DESC;
+``` 
 
 > **What's Your Query?**
 > "If our table had 100 columns and a million rows, what would happen to our computer's memory if we always used `SELECT *`?"
@@ -166,6 +175,17 @@ ORDER BY
 
 - "I want to find a home for my parents. They need something larger than 100sqm, but my budget is strictly under $600,000. How would we write that rule?"
 - Define your own filter for flats in a specific town, with a price range and floor area requirement etc. Then sort the results by resale price (highest first) and floor area (largest first).
+
+```sql
+SELECT
+  block, street_name, flat_type, floor_area_sqm, resale_price
+FROM
+  resale_flat_prices_2017
+WHERE
+  town = 'BISHAN' AND resale_price < 600000 AND floor_area_sqm > 100
+ORDER BY
+  resale_price DESC, floor_area_sqm DESC;
+```
 
 > **What's Your Query?**
 
