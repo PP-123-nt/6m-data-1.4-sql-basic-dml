@@ -219,6 +219,18 @@ WHERE
 - Select flats with resale price between 400,000 and 500,000.
 - Select flats with lease commence date later than year 2000 and floor area greater than 100 sqm.
 
+```sql
+SELECT * FROM resale_flat_prices_2017
+WHERE 
+  town IN ('BUKIT MERAH', 'BUKIT TIMAH','PUNGGOL') 
+  AND resale_price BETWEEN 400000 AND 500000 
+  AND floor_area_sqm > 100 
+  AND lease_commence_date > 2000
+ORDER BY
+  resale_price DESC, floor_area_sqm DESC;
+```
+
+
 **Advanced Filters:**
 
 ```sql
