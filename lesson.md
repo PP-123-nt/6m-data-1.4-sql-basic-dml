@@ -346,8 +346,31 @@ GROUP BY
 ```
 
 👋 **Exercise 5:**
-- Select the average resale price of flats in Bishan.
+- Select the average resale price of flats in Bishan.\
+**Bishan average resale by flat type**
+```sql
+SELECT
+  flat_type,
+  AVG(resale_price) AS avg_price
+FROM
+  resale_flat_prices_2017
+WHERE town = 'BISHAN'
+GROUP BY
+  flat_type; 
+```
+
 - Select the total resale value (price) of flats in Tampines.
+```sql
+SELECT
+  town,
+  SUM(resale_price) AS total_price
+FROM
+  resale_flat_prices_2017
+WHERE town = 'TAMPINES'
+GROUP BY
+  town; 
+```
+
 
 ---
 
