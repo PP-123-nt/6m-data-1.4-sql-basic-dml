@@ -417,6 +417,31 @@ ORDER BY
 7. ORDER BY
 8. LIMIT
 
+💡💡💡 **Example** 💡💡💡
+```sql
+SELECT 
+ town, 
+ AVG(resale_price) AS avg_price,
+ CAST(AVG(resale_price) AS INTEGER) AS avg_price_int,   -- convert to INTEGER
+ CASE                                                   -- add price category column 
+  WHEN avg_price_int >= 800000 THEN 'High'
+  WHEN avg_price_int >= 650000 THEN 'Mid'
+  ELSE 'Budget'
+ END AS ave_price_category
+FROM 
+ resale_flat_prices_2017
+WHERE 
+ flat_type = '4 ROOM'         -- filters rows first
+GROUP BY 
+ town
+HAVING 
+ AVG(resale_price) > 500000   -- filters groups after aggregation
+ORDER BY 
+ avg_price DESC               -- can use the alias
+LIMIT 10;
+```
+
+
 **WHERE vs. HAVING side-by-side:**
 
 ```sql
