@@ -595,7 +595,7 @@ FROM
 GROUP BY
   town
 HAVING
-  max_resale_price > 9000000
+  max_resale_price > 900000
 ORDER BY
   max_resale_price DESC;
 ```
