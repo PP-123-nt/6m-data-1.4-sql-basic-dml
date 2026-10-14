@@ -729,8 +729,46 @@ date_part('day', DATE '2017-03-15')    -- 15
 
 👋👋👋 **Group Exercise 9 — CAST:**
 - Show `resale_price` rounded down to the nearest thousand by casting to `INTEGER` (e.g. `resale_price / 1000` cast to `INTEGER`, then `* 1000`).
+
+✅✅✅ **Answer** ✅✅✅ add floor function to round down (eg. $425,888 to $425,000)
+```sql
+SELECT
+  *,
+  CAST(floor(resale_price / 1000) AS INTEGER) * 1000 AS resale_price_rounded   
+FROM resale_flat_prices_2017;
+```
+
+✅✅✅ **Answer** ✅✅✅ without floor function round to the nearest instead (eg. $425,888 w/o floor function is $426,000)
+```sql
+SELECT
+  *,
+  CAST((resale_price / 1000) AS INTEGER) * 1000 AS resale_price_rounded
+FROM resale_flat_prices_2017;
+```
+
 - Convert the text `month` column to a real `DATE` and extract the transaction month number (1–12).
+
+✅✅✅ **Answer** ✅✅✅
+```sql
+SELECT
+    month,
+    (month || '-01')::DATE AS transaction_date,   -- CAST to convert month type to DATE as new column transaction_date
+    date_part('month', (month || '-01')::DATE) AS sale_month
+FROM resale_flat_prices_2017;
+```
+
+
 - Cast `floor_area_sqm` to `INTEGER` and show it next to the original value — what happens to the decimals?
+
+✅✅✅ **Answer** ✅✅✅ - floor_area_sqm_int will be rouded eg. 67.4 to 67, 92.9 to 93
+```sql
+SELECT
+    floor_area_sqm,
+    floor_area_sqm::INTEGER AS floor_area_sqm_int,
+FROM resale_flat_prices_2017;
+```
+
+
 
 **Optional — Changing the Table Schema:**
 
@@ -761,7 +799,18 @@ FROM
 ### 💬 Reflection
 
 - What does the `::` mean in DuckDB/PostgreSQL? How does it relate to `CAST()`?
+
+✅✅✅ **Answer** ✅✅✅
+The :: is the cast operator: a shorthand for CAST(). Both convert a value from one data type to another, and they give the same result.
+```sql
+SELECT CAST(resale_price AS INTEGER);   -- standard SQL
+SELECT resale_price::INTEGER;           -- DuckDB / PostgreSQL shorthand
+```
+
 - Why is it important to standardize date formats when merging data from two different countries?
+
+✅✅✅ **Answer** ✅✅✅
+Same written date can mean two different dates depending on the country, and a database can’t tell which one was intended. If you merge without standardizing, you get wrong data that looks perfectly valid.
 
 ---
 
