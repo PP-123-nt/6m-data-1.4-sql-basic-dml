@@ -154,7 +154,7 @@ Realistic range
 | `-` | Subtraction |
 | `*` | Multiplication |
 | `/` | Division |
-| `%` | Modulo |
+| `%` | Modulo |  => result: remainder after division
 
 > **Modulo (`%`)** returns remainder after division, not quotient. Example: `10 % 3` = `1` (3 goes into 10 three times, remainder 1). Common use: check even/odd (`x % 2 = 0` means even), or group rows into buckets (`row_num % 5` cycles 0-4).
 
