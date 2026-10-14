@@ -682,6 +682,17 @@ SELECT
 FROM
   resale_flat_prices_2017;
 ```
+⚠️⚠️⚠️ **CAST in a SELECT only changes the result of a query. It never change the stored table type to INT. CAST query produced a new column, resale_price_int, and the original sits next to it remain unchanged.** ⚠️⚠️⚠️
+
+<br>
+
+⚠️⚠️⚠️ **Use ALTER TABLE and ALTER COLUMN to update stored table type to INTEGER permanently**⚠️⚠️⚠️
+```sql
+ALTER TABLE main.resale_flat_prices_2017
+ALTER COLUMN resale_price TYPE INTEGER;
+```
+
+<br>
 
 **Convert text to a real date and extract the year:**
 
@@ -702,6 +713,17 @@ SELECT
     date_part('year', (month || '-01')::DATE) AS sale_year
 FROM resale_flat_prices_2017;
 ```
+
+⚠️⚠️⚠️ **date_part is a built-in DuckDB function. You don’t import or define it, and it’s available in every query. It’s part of DuckDB’s date and time functions. What it does: it extracts one piece (year, month, day, and so on) from a date or timestamp** ⚠️⚠️⚠️ 
+```sql
+date_part('year', DATE '2017-03-15')   -- 2017
+date_part('month', DATE '2017-03-15')  -- 3
+date_part('day', DATE '2017-03-15')    -- 15
+```
+
+<br><br>
+
+
 
 > **Question:** "If the `month` column is text `'2017-01'`, can we add 1 month to it directly? Why do we need to `CAST` it to a `DATE` type first?"
 
