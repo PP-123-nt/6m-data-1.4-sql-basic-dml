@@ -105,6 +105,8 @@ ORDER BY
 👋 **Exercise 1:**
 - Select any 3 columns from the table.
 - Select flats from highest to lowest resale price in Punggol.
+
+✅✅✅ **Answer**
 ```sql
 SELECT
   town, street_name, resale_price
@@ -176,6 +178,7 @@ ORDER BY
 - "I want to find a home for my parents. They need something larger than 100sqm, but my budget is strictly under $600,000. How would we write that rule?"
 - Define your own filter for flats in a specific town, with a price range and floor area requirement etc. Then sort the results by resale price (highest first) and floor area (largest first).
 
+✅✅✅ **Answer**
 ```sql
 SELECT
   block, street_name, flat_type, floor_area_sqm, resale_price
@@ -219,6 +222,7 @@ WHERE
 - Select flats with resale price between 400,000 and 500,000.
 - Select flats with lease commence date later than year 2000 and floor area greater than 100 sqm.
 
+✅✅✅ **Answer**
 ```sql
 SELECT * FROM resale_flat_prices_2017
 WHERE 
@@ -346,8 +350,9 @@ GROUP BY
 ```
 
 👋 **Exercise 5:**
-- Select the average resale price of flats in Bishan.\
-**Bishan average resale by flat type**
+- Select the average resale price of flats in Bishan.
+
+✅✅✅ **Answer - Bishan average resale by flat type**
 ```sql
 SELECT
   flat_type,
@@ -463,6 +468,8 @@ GROUP BY
 
 👋👋👋 **Group Exercise 6:**
 - Select the average resale price by flat type.
+
+✅✅✅ **Answer**
 ```sql
 SELECT
   flat_type,
@@ -474,6 +481,8 @@ GROUP BY
 ```
   
 - Select the average resale price by flat type and flat model.
+
+✅✅✅ **Answer**
 ```sql
 SELECT
   flat_type,
@@ -486,6 +495,8 @@ GROUP BY
 ```
   
 - Select the average resale price by town and lease commence date, only for lease commence dates after year 2010, sorted by town (descending) and lease commence date (descending).
+
+✅✅✅ **Answer**
 ```sql
 SELECT
   town,
@@ -505,6 +516,8 @@ ORDER BY
 
 👋👋👋 **Group Exercise 7 — HAVING:**
 - Count transactions per town, then show only towns with more than 5,000 transactions.
+
+✅✅✅ **Answer**
 ```sql
 SELECT
   town,
@@ -520,6 +533,8 @@ ORDER BY
 ```
 
 - Show the average floor area per flat type, but only for flat types whose average floor area is above 90 sqm.
+
+✅✅✅ **Answer**
 ```sql
 SELECT
   flat_type,
@@ -535,6 +550,8 @@ ORDER BY
 ```
 
 - Find towns where the maximum resale price exceeds $900,000, sorted highest first. (Hint: filter on `MAX(resale_price)` in `HAVING`.)
+
+✅✅✅ **Answer**
 ```sql
 SELECT
   town,
