@@ -258,6 +258,15 @@ SELECT DISTINCT town FROM resale_flat_prices_2017;
 - Return the unique flat types and flat models.
 - Find all towns starting with "P".
 
+✅✅✅ **Answer**
+```sql
+SELECT DISTINCT town, flat_type, flat_model, 
+FROM main.resale_flat_prices_2017
+WHERE town LIKE 'P%'
+ORDER BY flat_type, flat_model;
+```
+
+
 **Functions:**
 
 | Function | Description |
