@@ -589,7 +589,7 @@ Transform data using `CASE` statements for conditional categorisation and `CAST`
 
 ### Concept Overview
 
-"Data isn't always ready for analysis. A `month` column might be a text string like `'2017-01'` instead of a date object. `CAST` (or the `::` shorthand) acts as our translator to fix types. Meanwhile, `CASE` allows us to create new labels — like tagging a flat as 'Large' or 'Small' based on its type — making our data much easier to read."
+"Data isn't always ready for analysis. A `month` column might be a text string like `'2017-01'` instead of a date object. **`CAST` (or the `::` shorthand) acts as our translator to fix types**. Meanwhile, **`CASE` allows us to create new labels** — like tagging a flat as 'Large' or 'Small' based on its type — making our data much easier to read."
 
 ### 🛠️ Workshop — Task 5: Categorizing with CASE
 
@@ -625,7 +625,37 @@ FROM
 
 👋👋👋 **Group Exercise 8:**
 - Design your own "budget/mid/high-end" categories based on resale_price.
+
+✅✅✅ **Answer** ✅✅✅
+```sql
+SELECT
+  town,
+  flat_type,
+  resale_price,
+  CASE
+    WHEN resale_price > 1000000 THEN 'High-End'
+    WHEN resale_price > 700000 THEN 'Mid-Range'
+    ELSE 'Budget'
+  END AS price_category
+FROM
+  resale_flat_prices_2017;
+```
+
 - Design a "old vs new" label based on lease_commence_date.
+
+✅✅✅ **Answer** ✅✅✅
+```sql
+SELECT
+  town,
+  remaining_lease,
+  resale_price,
+  CASE
+    WHEN lease_commence_date > 2015 THEN 'New Flat'
+    ELSE 'Old Flat'
+  END AS lease_commence_date
+FROM
+  resale_flat_prices_2017;
+```
 
 ---
 
