@@ -40,25 +40,47 @@ LIMIT
 ```
 
 <br>
+
 **Level Up:** Create a new column called price\_per\_sqm and find which town has the lowest average price per square meter.
 
 ✅✅✅ **Answer** ✅✅✅
 ```sql
-ALTER TABLE
+ALTER TABLE                   -- add new column
   resale_flat_prices_2017
 ADD COLUMN
   price_per_sqm INTEGER;
 
-
-UPDATE
+UPDATE                        -- add formula to new column 
   resale_flat_prices_2017
 SET
   price_per_sqm = resale_price / floor_area_sqm
+
+SELECT                        -- find lowest average price/sqm
+ town,
+ AVG(price_per_sqm) AS ave_price_per_sqm
+FROM 
+ resale_flat_prices_2017
+GROUP BY
+ town
+ORDER BY
+ ave_price_per_sqm
+LIMIT
+ 1;
 ```
 
 <br>
+
 **🚀 Stretch goal (Lesson 1.5 preview):** a *subquery* lets you nest both steps into one query — try it after the two-step way works.
 
+✅✅✅ **Answer** ✅✅✅
+```sql
+
+
+
+
+```
+
+<br>
 
 ---
 
