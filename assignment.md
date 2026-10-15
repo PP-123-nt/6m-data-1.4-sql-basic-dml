@@ -74,10 +74,21 @@ LIMIT
 
 ✅✅✅ **Answer** ✅✅✅
 ```sql
-
-
-
-
+SELECT 
+    town, 
+    block, 
+    street_name, 
+    floor_area_sqm, 
+    resale_price
+FROM resale_flat_prices_2017
+WHERE town IN (                           -- This 'Inner Query' finds our undervalued towns
+    SELECT town
+    FROM resale_flat_prices_2017
+    GROUP BY town
+    HAVING AVG(resale_price) < 460000
+)
+ORDER BY floor_area_sqm DESC
+LIMIT 5;
 ```
 
 <br>
