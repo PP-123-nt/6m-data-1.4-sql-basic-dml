@@ -413,9 +413,10 @@ ORDER BY
 3. GROUP BY
 4. AGGREGATE (SUM/AVG/COUNT/MIN/MAX)
 5. HAVING
-6. SELECT
-7. ORDER BY
-8. LIMIT
+6. SELECT (window functions run here)
+7. QUALIFY
+8. ORDER BY
+9. LIMIT
 
 💡💡💡 **Example** 💡💡💡
 ```sql
@@ -441,6 +442,28 @@ ORDER BY
 LIMIT 10;
 ```
 
+```sql
+SELECT 
+ town, 
+ CAST(AVG(resale_price) AS INTEGER) AS avg_price,
+ CASE
+  WHEN avg_price >= 800000 THEN 'High'
+  WHEN avg_price >= 650000 THEN 'Mid'
+  ELSE 'Budget'
+ END AS ave_price_category,
+ RANK() OVER (ORDER BY AVG(floor_area_sqm) DESC) AS floor_area_rank
+FROM 
+ resale_flat_prices_2017
+WHERE 
+ flat_type = '5 ROOM'        -- filters rows first
+GROUP BY
+ town
+HAVING 
+ avg_price > 500000      -- filters groups after aggregation
+QUALIFY floor_area_rank IN (1,2,3,4)
+ORDER BY 
+ avg_price DESC;          -- can use the alias
+```
 
 **WHERE vs. HAVING side-by-side:**
 
