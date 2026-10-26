@@ -407,7 +407,7 @@ ORDER BY
 
 `WHERE` filters individual rows **before** they are grouped. To filter on aggregated results, use `HAVING` — the *post-grouping filter*.
 
-💡 SQL execution order: 
+📝📝📝 **SQL execution order:** 📝📝📝
 1. FROM / JOIN
 2. WHERE
 3. GROUP BY
@@ -418,7 +418,7 @@ ORDER BY
 8. ORDER BY
 9. LIMIT
 
-💡💡💡 **Example** 💡💡💡
+💡💡💡 **Examples** 💡💡💡
 ```sql
 SELECT 
  town, 
@@ -460,10 +460,11 @@ GROUP BY
  town
 HAVING 
  avg_price > 500000      -- filters groups after aggregation
-QUALIFY floor_area_rank IN (1,2,3,4)
+QUALIFY floor_area_rank IN (1,2,3,4)  -- filter top 4 by average floor area
 ORDER BY 
- avg_price DESC;          -- can use the alias
+ avg_price DESC;          
 ```
+
 | town | avg_price | ave_price_category | floor_area_rank |
 |---|---|---|---|
 | BUKIT TIMAH | 943765 | High | 2 |
@@ -471,6 +472,39 @@ ORDER BY
 | PASIR RIS | 593762 | Budget | 1 |
 | JURONG EAST | 587635 | Budget | 4 |
 
+<br>
+
+```sql
+-- filter by rank w/o adding ranking column
+SELECT 
+ town, 
+ CAST(AVG(resale_price) AS INTEGER) AS avg_price,
+ CASE
+  WHEN avg_price >= 800000 THEN 'High'
+  WHEN avg_price >= 650000 THEN 'Mid'
+  ELSE 'Budget'
+ END AS ave_price_category,
+FROM 
+ resale_flat_prices_2017
+WHERE 
+ flat_type = '5 ROOM'        -- filters rows first
+GROUP BY
+ town
+HAVING 
+ avg_price > 500000      -- filters groups after aggregation
+QUALIFY RANK() OVER (ORDER BY AVG(floor_area_sqm) DESC) <= 4  -- filter top 4 by average floor area
+ORDER BY 
+ avg_price DESC;   
+```
+
+| town | avg_price | ave_price_category | 
+|---|---|---|
+| BUKIT TIMAH | 943765 | High | 
+| BISHAN | 852927 | High | 
+| PASIR RIS | 593762 | Budget | 
+| JURONG EAST | 587635 | Budget |
+
+<br>
 
 **WHERE vs. HAVING side-by-side:**
 
