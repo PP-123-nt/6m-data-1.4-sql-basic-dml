@@ -464,6 +464,13 @@ QUALIFY floor_area_rank IN (1,2,3,4)
 ORDER BY 
  avg_price DESC;          -- can use the alias
 ```
+| town | avg_price | ave_price_category | floor_area_rank |
+|---|---|---|---|
+| BUKIT TIMAH | 943765 | High | 2 |
+| BISHAN | 852927 | High | 3 |
+| PASIR RIS | 593762 | Budget | 1 |
+| JURONG EAST | 587635 | Budget | 4 |
+
 
 **WHERE vs. HAVING side-by-side:**
 
